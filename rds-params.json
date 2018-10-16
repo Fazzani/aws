@@ -1,0 +1,10 @@
+[
+  {
+    "ParameterKey": "subnetAZ1",
+    "ParameterValue": "subnet-09c525f33fe09f774"
+  },
+  {
+    "ParameterKey": "subnetAZ2",
+    "ParameterValue": "subnet-0d664b7d462062af4"
+  }
+]

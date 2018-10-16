@@ -1,0 +1,41 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Master stack: PathToMasterStackFile'
+
+Parameters:
+  subnetAZ1:
+    Type: String
+  subnetAZ2:
+    Type: String
+
+Resources:
+  myDBSubnetGroup: 
+   Type: "AWS::RDS::DBSubnetGroup"
+   Properties: 
+     DBSubnetGroupDescription: "description"
+     SubnetIds: 
+       - !Ref 'subnetAZ1'
+       - !Ref 'subnetAZ2'
+     Tags: 
+       - 
+         Key: "String"
+         Value: "String"
+  rdsDBInstance:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      AllocatedStorage: "100"
+      DBInstanceClass: "db.t2.small"
+      DBName: AWS_WRK
+      DBSubnetGroupName: !Ref 'myDBSubnetGroup'
+      Engine: sqlserver
+      MultiAZ: true
+      PubliclyAccessible: false
+      StorageEncrypted: true
+      VPCSecurityGroups:
+        - vpc-sg-id
+      Tags:
+        - Key: workshop
+          Value: true
+  
+
+# Outputs:

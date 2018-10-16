@@ -1,0 +1,32 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Deploy cloudFormation",
+      "type": "shell",
+      "command": "aws cloudformation deploy --template-body file://${fileBasename} --stack-name rds-stackz --parameters file://./rds-params.json"
+    },
+    {
+      "label": "Create cloudFormation",
+      "type": "shell",
+      "command": "aws cloudformation create-stack --template-body file://${fileBasename} --stack-name rds-stackz --parameters file://./rds-params.json"
+    },
+    {
+      "label": "Update cloudFormation",
+      "type": "shell",
+      "command": "aws cloudformation update-stack --template-body file://${fileBasename} --stack-name rds-stackz --parameters file://./rds-params.json"
+    },
+    {
+      "label": "CloudFormation validate",
+      "type": "shell",
+      "command": "aws cloudformation validate-template --template-body file://${fileBasename}"
+    },
+    {
+      "label": "CloudFormation delete stack",
+      "type": "shell",
+      "command": "aws cloudformation delete-stack --stack-name rds-stack"
+    }
+  ]
+}
