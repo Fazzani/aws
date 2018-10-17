@@ -35,7 +35,6 @@ Resources:
         - vpc-sg-id
       Tags:
         - Key: workshop
-          Value: true
-  
+          Value: "true"
 
 # Outputs:

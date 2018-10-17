@@ -4,29 +4,63 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "CloudFormation validate",
+      "type": "shell",
+      "command": "aws cloudformation validate-template --template-body file://${fileBasename}",
+      "problemMatcher": {
+        "owner": "cpp",
+        "fileLocation": ["relative", "${workspaceFolder}"],
+        "pattern": {
+          "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 5
+        }
+      }
+    },
+    {
       "label": "Deploy cloudFormation",
       "type": "shell",
-      "command": "aws cloudformation deploy --template-body file://${fileBasename} --stack-name rds-stackz --parameters file://./rds-params.json"
+      "command": "aws cloudformation deploy --template-body file://${fileBasename} --stack-name rds-stackz --parameters file://./rds-params.json",
+      "dependsOn": ["CloudFormation validate"]
     },
     {
       "label": "Create cloudFormation",
       "type": "shell",
-      "command": "aws cloudformation create-stack --template-body file://${fileBasename} --stack-name rds-stackz --parameters file://./rds-params.json"
+      "command": "aws cloudformation create-stack --template-body file://${fileBasename} --stack-name rds-stackz --parameters file://./rds-params.json",
+      "dependsOn": ["CloudFormation validate"]
     },
     {
       "label": "Update cloudFormation",
       "type": "shell",
-      "command": "aws cloudformation update-stack --template-body file://${fileBasename} --stack-name rds-stackz --parameters file://./rds-params.json"
-    },
-    {
-      "label": "CloudFormation validate",
-      "type": "shell",
-      "command": "aws cloudformation validate-template --template-body file://${fileBasename}"
+      "command": "aws cloudformation update-stack --template-body file://${fileBasename} --stack-name rds-stackz --parameters file://./rds-params.json",
+      "dependsOn": ["CloudFormation validate"]
     },
     {
       "label": "CloudFormation delete stack",
       "type": "shell",
       "command": "aws cloudformation delete-stack --stack-name rds-stack"
+    },
+    {
+      "label": "CF Type Search",
+      "type": "shell",
+      "command": "Start-Process chrome.exe 'https://docs.aws.amazon.com/search/doc-search.html?searchPath=documentation-guide&searchQuery=%22${selectedText}%22&x=0&y=0&this_doc_product=AWS+CloudFormation&this_doc_guide=User+Guide&doc_locale=en_us#facet_doc_product=AWS%20CloudFormation&facet_doc_guide=User%20Guide'",
+
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "never"
+      }
+    },
+    {
+      "label": "CF Resource List",
+      "type": "shell",
+      "command": "Start-Process chrome.exe \"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\"",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "never"
+      }
     },
     {
       "label": "runwithargs",
