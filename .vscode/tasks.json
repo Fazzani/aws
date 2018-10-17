@@ -27,6 +27,37 @@
       "label": "CloudFormation delete stack",
       "type": "shell",
       "command": "aws cloudformation delete-stack --stack-name rds-stack"
+    },
+    {
+      "label": "runwithargs",
+      "type": "shell",
+      "windows": {
+        "options": {
+          "shell": {
+            "executable": "powershell.exe",
+            "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-Command"]
+          }
+        },
+        "command": "",
+        "args": [
+          {
+            "value": "$cmdargs = read-host 'Enter command line arguments';",
+            "quoting": "weak"
+          },
+          {
+            "value": "$morecmdargs = read-host 'Enter more command line arguments';",
+            "quoting": "weak"
+          },
+          {
+            "value": "Write-Host $cmdargs $morecmdargs",
+            "quoting": "weak"
+          }
+        ]
+      },
+      "presentation": {
+        "panel": "dedicated",
+        "focus": true
+      }
     }
   ]
 }
